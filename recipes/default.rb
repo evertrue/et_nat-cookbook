@@ -7,7 +7,6 @@
 # All rights reserved - Do Not Redistribute
 #
 
-
 execute 'sysctl-nat' do
   command 'sysctl -p /etc/sysctl.d/nat.conf'
   action  :nothing
@@ -22,9 +21,10 @@ cookbook_file '/etc/sysctl.d/nat.conf' do
 end
 
 execute 'iptables-masquerade' do
-  command '/sbin/iptables -t nat -A POSTROUTING -o eth0 -s 0.0.0.0/0 -j MASQUERADE'
+  command '/sbin/iptables -t nat -A POSTROUTING -o eth0 -s 0.0.0.0/0 ' \
+          '-j MASQUERADE'
   action  :run
-  not_if "/sbin/iptables -t nat --list | grep -q '^MASQUERADE'"
+  not_if  "/sbin/iptables -t nat --list | grep -q '^MASQUERADE'"
 end
 
 cookbook_file '/etc/iptables.rules' do
