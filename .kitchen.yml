@@ -9,14 +9,14 @@ provisioner:
     environment: 'dev'
 
 platforms:
-- name: ubuntu-12.04
-  driver_config:
-    customize:
-      cpus: 4
-      memory: 1536
-    box: opscode-ubuntu-12.04
-    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
-
+  - name: ubuntu-14.04
+    driver_config:
+      customize:
+        cpus: 4
+        memory: 1536
+      network:
+        - - private_network
+          - ip: '192.168.33.11'
 
 suites:
 - name: default
