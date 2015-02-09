@@ -67,8 +67,9 @@ module EtTools
       connection.servers.get( @other_gateway_id ).start
       sleep @wait_for_instance_start
       if connection.servers.get( @other_gateway_id ).state != 'running'
-        'WARNING: Other instance still not running after ' +
+        output 'WARNING: Other instance still not running after ' +
           @wait_for_instance_start + ' seconds.  Giving up.'
+      end
     end
 
     def stonith
