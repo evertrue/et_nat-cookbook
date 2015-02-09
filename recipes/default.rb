@@ -42,7 +42,7 @@ nat_instances = search(:node,
 if nat_instances.count > 1
   # Only try to set up a heartbeat if we're actually in a
   # primary/failover cluster
-  gem_package 'net_ping'
+  gem_package 'net-ping'
   gem_package 'unf'
   gem_package 'fog'
 
