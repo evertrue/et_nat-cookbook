@@ -1,0 +1,22 @@
+{
+  "name": "nat2",
+  "chef_environment": "dev",
+  "override": {
+    "nat": {
+      "cluster_name": "testkitchen"
+    }
+  },
+  "automatic": {
+    "fqdn": "nat2.vagrantup.com",
+    "recipes": [
+      "et_nat"
+    ],
+    "roles": [
+      "nat"
+    ],
+    "ipaddress": "192.168.33.12",
+    "ec2": {
+      "instance_id": "i-00000002"
+    }
+  }
+}

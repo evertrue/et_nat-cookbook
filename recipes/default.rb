@@ -6,6 +6,8 @@
 #
 # All rights reserved - Do Not Redistribute
 #
+# rubocop: disable SingleSpaceBeforeFirstArg
+include_recipe 'et_fog'
 
 execute 'sysctl-nat' do
   command 'sysctl -p /etc/sysctl.d/nat.conf'
@@ -39,38 +41,50 @@ nat_instances = search(:node,
                        "chef_environment: #{node.chef_environment} AND " \
                        "nat_cluster_name:#{node['nat']['cluster_name']}")
 
-if nat_instances.count > 1
-  # Only try to set up a heartbeat if we're actually in a
-  # primary/failover cluster
+if nat_instances.count > 2
+  # Only try to set up a heartbeat if we're actually in a cluster
   gem_package 'net-ping'
   gem_package 'unf'
   gem_package 'fog'
+  gem_package 'nat-monitor'
 
   log 'Other instances found.  Setting up the NAT Monitor.' do
     level :info
   end
 
-  template '/etc/nat_monitor.yml' do
-    source 'nat_monitor.yml.erb'
+  node.set['nat']['yaml']['nodes'] =
+    nat_instances.each_with_object({}) do |n, m|
+      fail "no ec2 attribute found: #{n.inspect}" unless n['ec2']
+      m[n['ec2']['instance_id']] = n['ipaddress']
+    end
+
+  if node['nat']['route_table']
+    node.set['nat']['yaml']['route_table'] = node['nat']['route_table']
+  else
+    node.set['nat']['yaml']['route_table'] =
+      ::EverTrue::EtNat::Helpers.nat_route_table_id(
+        node.chef_environment,
+        (if node['nat']['yaml']['aws_url']
+           { endpoint: node['nat']['yaml']['aws_url'] }
+         else
+           {}
+         end)
+      )
+  end
+
+  file '/etc/nat_monitor.yml' do
     owner  'root'
     group  'root'
     mode   0644
-    variables(:other_gateway_id => other_gateway_id)
+    content JSON.parse(node['nat']['yaml'].to_json).to_yaml
   end
 
-  cookbook_file '/usr/bin/nat_monitor.rb' do
-    source 'nat_monitor.rb'
-    owner  'root'
-    group  'root'
-    mode   0755
-  end
-
-  cron 'nat_monitor' do
+  cron 'nat-monitor' do
     minute '@reboot'
     hour ''
     day ''
     month ''
     weekday ''
-    command 'ruby /usr/bin/nat_monitor.rb'
+    command '/opt/chef/embedded/bin/ruby /opt/chef/embedded/bin/nat-monitor'
   end
 end
