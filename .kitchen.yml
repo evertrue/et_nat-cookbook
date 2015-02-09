@@ -19,9 +19,14 @@ platforms:
           - ip: '192.168.33.11'
 
 suites:
-- name: default
-  run_list: ['recipe[et_nat]']
-  data_bags_path: ../../server-chef/data_bags
-  provisioner:
-    client_rb:
-      environment: 'stage-newvpc'
+  - name: default
+    run_list:
+      - recipe[et_nat::default]
+    attributes:
+      nat:
+        cluster_name: testkitchen
+        route_table: rtb-a1b2c3d4
+        yaml:
+          aws_url: http://192.168.1.191:5000
+      ec2:
+        instance_id: i-00000003
