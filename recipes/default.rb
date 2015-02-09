@@ -66,7 +66,11 @@ if nat_instances.count > 1
   end
 
   cron 'nat_monitor' do
-    minute  '@reboot'
+    minute '@reboot'
+    hour ''
+    day ''
+    month ''
+    weekday ''
     command 'ruby /usr/bin/nat_monitor.rb'
   end
 end
