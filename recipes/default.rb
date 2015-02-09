@@ -34,7 +34,10 @@ cookbook_file '/etc/iptables.rules' do
   mode   0644
 end
 
-nat_instances = search(:node, 'recipes:et_nat AND chef_environment:' + node.chef_environment)
+nat_instances = search(:node,
+                       'recipes:et_nat AND ' \
+                       "chef_environment: #{node.chef_environment} AND " \
+                       "nat_cluster_name:#{node['nat']['cluster_name']}")
 
 if nat_instances.count > 1
   # Only try to set up a heartbeat if we're actually in a
