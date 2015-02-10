@@ -38,7 +38,7 @@ end
 
 nat_instances = search(:node,
                        'recipes:et_nat AND ' \
-                       "chef_environment: #{node.chef_environment} AND " \
+                       "chef_environment:#{node.chef_environment} AND " \
                        "nat_cluster_name:#{node['nat']['cluster_name']}")
 
 if nat_instances.count > 2
