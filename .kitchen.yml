@@ -25,7 +25,7 @@ suites:
     attributes:
       nat:
         cluster_name: testkitchen
-        route_table: rtb-a1b2c3d4
+        route_table_id: rtb-a1b2c3d4
         yaml:
           aws_access_key_id: AWS_ACCESS_KEY_ID
           aws_secret_access_key: AWS_SECRET_ACCESS_KEY

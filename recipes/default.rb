@@ -58,8 +58,8 @@ if nat_instances.count > 2
       m[n['ec2']['instance_id']] = n['ipaddress']
     end
 
-  if node['nat']['route_table']
-    node.set['nat']['yaml']['route_table'] = node['nat']['route_table']
+  if node['nat']['route_table_id']
+    node.set['nat']['yaml']['route_table_id'] = node['nat']['route_table_id']
   else
     if node['nat']['yaml']['aws_access_key_id']
       conn_opts = {
@@ -74,7 +74,7 @@ if nat_instances.count > 2
       conn_opts[:endpoint] = node['nat']['yaml']['aws_url']
     end
 
-    node.set['nat']['yaml']['route_table'] =
+    node.set['nat']['yaml']['route_table_id'] =
       ::EverTrue::EtNat::Helpers.nat_route_table_id(
         node.chef_environment,
         conn_opts
