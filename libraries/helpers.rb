@@ -23,7 +23,7 @@ module EverTrue
           end.empty?
         end
         fail 'Found more than one viable route table' if table.count > 1
-        table
+        table.id
       end
     end
   end
