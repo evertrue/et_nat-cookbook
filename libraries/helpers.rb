@@ -1,11 +1,10 @@
 module EverTrue
   module EtNat
     module Helpers
-      def self.nat_route_table_id(env, conn_opts = {})
+      def self.nat_route_table_id(env, conn_opts)
         require 'fog'
 
-        conn_opts.merge!(aws_access_key_id: 'AWS_ACCESS_KEY_ID',
-                         aws_secret_access_key: 'AWS_SECRET_ACCESS_KEY')
+        conn_opts.merge!(conn_opts)
 
         Chef::Log.debug("Using conn_opts: #{conn_opts.inspect}")
 

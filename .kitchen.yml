@@ -27,6 +27,8 @@ suites:
         cluster_name: testkitchen
         route_table: rtb-a1b2c3d4
         yaml:
+          aws_access_key_id: AWS_ACCESS_KEY_ID
+          aws_secret_access_key: AWS_SECRET_ACCESS_KEY
           aws_url: http://192.168.1.191:5000
       ec2:
         instance_id: i-00000003

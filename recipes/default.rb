@@ -61,14 +61,23 @@ if nat_instances.count > 2
   if node['nat']['route_table']
     node.set['nat']['yaml']['route_table'] = node['nat']['route_table']
   else
+    if node['nat']['yaml']['aws_access_key_id']
+      conn_opts = {
+        aws_access_key_id: node['nat']['yaml']['aws_access_key_id'],
+        aws_secret_access_key: node['nat']['yaml']['aws_secret_access_key']
+      }
+    else
+      conn_opts = { use_iam_profile: true }
+    end
+
+    if node['nat']['yaml']['aws_url']
+      conn_opts[:endpoint] = node['nat']['yaml']['aws_url']
+    end
+
     node.set['nat']['yaml']['route_table'] =
       ::EverTrue::EtNat::Helpers.nat_route_table_id(
         node.chef_environment,
-        (if node['nat']['yaml']['aws_url']
-           { endpoint: node['nat']['yaml']['aws_url'] }
-         else
-           {}
-         end)
+        conn_opts
       )
   end
 
