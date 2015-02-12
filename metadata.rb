@@ -4,6 +4,6 @@ maintainer_email 'eric.herot@evertrue.com'
 license          'All rights reserved'
 description      'Installs/Configures et_nat'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '1.1.6'
+version          '1.1.7'
 
 depends 'et_fog'
