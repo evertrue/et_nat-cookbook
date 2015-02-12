@@ -25,6 +25,22 @@ module EverTrue
         fail 'Found more than one viable route table' if table.count > 1
         table.first.id
       end
+
+      def self.disable_source_dest_check(network_interface_id, conn_opts)
+        require 'fog'
+
+        conn_opts.merge!(conn_opts)
+        Chef::Log.debug("Using conn_opts: #{conn_opts.inspect}")
+        connection = Fog::Compute::AWS.new(conn_opts)
+
+        return unless connection.network_interfaces.get(network_interface_id)
+                      .source_dest_check
+        connection.modify_network_interface_attribute(
+          network_interface_id,
+          'sourceDestCheck',
+          false
+        )
+      end
     end
   end
 end
