@@ -12,7 +12,7 @@ cookbook_file '/etc/sysctl.d/nat.conf' do
 end
 
 cookbook_file '/etc/iptables.rules' do
-  source 'iptables-save'
+  source 'iptables.rules'
   owner  'root'
   group  'root'
   mode   0644
