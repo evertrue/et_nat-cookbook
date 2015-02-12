@@ -24,3 +24,8 @@ cookbook_file '/etc/iptables.rules' do
   group  'root'
   mode   0644
 end
+
+cookbook_file '/etc/network/if-pre-up.d/iptables_load' do
+  source 'iptables_load'
+  mode   0755
+end
