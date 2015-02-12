@@ -11,18 +11,15 @@ cookbook_file '/etc/sysctl.d/nat.conf' do
   notifies :run, 'execute[sysctl-nat]'
 end
 
-execute 'iptables-masquerade' do
-  command '/sbin/iptables -t nat -A POSTROUTING -o eth0 -s 0.0.0.0/0 ' \
-          '-j MASQUERADE'
-  action  :run
-  not_if  "/sbin/iptables -t nat --list | grep -q '^MASQUERADE'"
-end
-
 cookbook_file '/etc/iptables.rules' do
   source 'iptables-save'
   owner  'root'
   group  'root'
   mode   0644
+end
+
+execute 'iptables-restore' do
+  command '/sbin/iptables-restore < /etc/iptables.rules'
 end
 
 cookbook_file '/etc/network/if-pre-up.d/iptables_load' do
