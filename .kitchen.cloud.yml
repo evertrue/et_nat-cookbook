@@ -1,0 +1,45 @@
+---
+driver:
+  name: ec2
+  aws_access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
+  aws_secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
+  aws_ssh_key_id: <%= ENV['AWS_KEYPAIR_NAME'] %>
+  ssh_key: <%= ENV['EC2_SSH_KEY_PATH'] %>
+  region: us-east-1
+  availability_zone: us-east-1b
+  security_group_ids: ['sg-c204d2a7']
+  username: ubuntu
+  flavor_id: c3.large
+  subnet_id: subnet-a792da8f
+  iam_profile_name: test-nat-ha
+  interface: private
+
+provisioner:
+  name: chef_zero
+  encrypted_data_bag_secret_key_path: <%= ENV['HOME'] %>/.chef/encrypted_data_bag_secret
+  client_rb:
+    environment: dev
+
+platforms:
+  - name: ubuntu-14.04
+    driver_config:
+      image_id: ami-44e9752c
+      tags:
+        Name: travis-ci-default-ubuntu-1204
+        Env: public
+
+suites:
+  - name: default
+    run_list:
+      - recipe[aws::ec2_hints]
+      - recipe[et_nat::default]
+    attributes:
+      nat:
+        cluster_name: testkitchen
+        route_table_id: rtb-a1b2c3d4
+        yaml: {}
+          # aws_access_key_id: AWS_ACCESS_KEY_ID
+          # aws_secret_access_key: AWS_SECRET_ACCESS_KEY
+          # aws_url: http://192.168.1.191:5000
+      ec2:
+        instance_id: i-00000003
