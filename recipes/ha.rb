@@ -8,7 +8,11 @@ if nat_instances.count > 2
   gem_package 'net-ping'
   gem_package 'unf'
   gem_package 'fog'
-  gem_package 'nat-monitor'
+
+  gem_package 'nat-monitor' do
+    action :upgrade
+    version '1.0.8'
+  end
 
   log 'Other instances found.  Setting up the NAT Monitor.' do
     level :info
