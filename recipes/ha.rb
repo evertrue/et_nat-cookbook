@@ -52,14 +52,16 @@ if nat_instances.count > 2
     group  'root'
     mode   0644
     content JSON.parse(node['nat']['yaml'].to_json).to_yaml
+    notifies :restart, 'service[nat-monitor]', :delayed
   end
 
-  cron 'nat-monitor' do
-    minute '@reboot'
-    hour ''
-    day ''
-    month ''
-    weekday ''
-    command '/opt/chef/embedded/bin/ruby /opt/chef/embedded/bin/nat-monitor'
+  cookbook_file '/etc/init/nat-monitor.conf' do
+    source 'nat-monitor.conf'
+    notifies :restart, 'service[nat-monitor]', :delayed
+  end
+
+  service 'nat-monitor' do
+    provider Chef::Provider::Service::Upstart
+    action   [:enable, :start]
   end
 end
