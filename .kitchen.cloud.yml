@@ -29,7 +29,7 @@ platforms:
         Env: public
 
 suites:
-  - name: default
+  - name: cloud
     run_list:
       - recipe[aws::ec2_hints]
       - recipe[et_nat::default]
