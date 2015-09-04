@@ -17,4 +17,4 @@ A cookbook to provide a NAT for an EC2 VPC (with HA if desired)
 
 # Author
 
-Author:: EverTrue, Inc. (<eric.herot@evertrue.com>)
+Author:: Eric Herot (<eric.herot@evertrue.com>)
