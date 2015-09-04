@@ -1,5 +1,5 @@
 nat_instances = search(:node,
-                       'recipes:et_nat AND ' \
+                       'run_list:recipe\[et_nat\] AND' \
                        "chef_environment:#{node.chef_environment} AND " \
                        "nat_cluster_name:#{node['nat']['cluster_name']}")
 
