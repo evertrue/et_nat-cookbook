@@ -18,5 +18,8 @@
     "roles": [
       "nat"
     ]
-  }
+  },
+  "run_list": [
+    "recipe[et_nat]"
+  ]
 }
