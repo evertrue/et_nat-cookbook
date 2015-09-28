@@ -60,7 +60,7 @@ if nat_instances.count > 2
     owner  'root'
     group  'root'
     mode   0644
-    content JSON.parse(node['nat']['yaml'].to_json).to_yaml
+    content yaml_config(node['nat']['yaml'])
     notifies :restart, 'service[nat-monitor]', :delayed
   end
 
