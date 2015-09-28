@@ -52,7 +52,7 @@ if nat_instances.count > 2
 
     %w(begin success fail).each do |status|
       node.set['nat']['yaml']['monitor_urls'][status] =
-        node['nat']['monitor']['api_urls'][az]
+        node['nat']['monitor']['api_urls'][az][status]
     end
   end
 
