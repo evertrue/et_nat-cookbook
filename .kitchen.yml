@@ -30,5 +30,13 @@ suites:
           aws_access_key_id: AWS_ACCESS_KEY_ID
           aws_secret_access_key: AWS_SECRET_ACCESS_KEY
           aws_url: http://192.168.1.191:5000
+          monitor_enabled: true
+        monitor:
+          api_urls:
+            us-east-1b:
+              run: http://example.com/run
+              complete: http://example.com/complete
+              fail: http://example.com/fail
       ec2:
         instance_id: i-00000003
+        placement_availability_zone: us-east-1b

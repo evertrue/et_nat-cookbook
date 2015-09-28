@@ -7,16 +7,19 @@
     }
   },
   "automatic": {
+    "ipaddress": "192.168.33.11",
+    "ec2": {
+      "instance_id": "i-00000003"
+    },
     "fqdn": "nat3.vagrantup.com",
     "recipes": [
       "et_nat"
     ],
     "roles": [
       "nat"
-    ],
-    "ipaddress": "192.168.33.11",
-    "ec2": {
-      "instance_id": "i-00000003"
-    }
-  }
+    ]
+  },
+  "run_list": [
+    "recipe[et_nat]"
+  ]
 }
