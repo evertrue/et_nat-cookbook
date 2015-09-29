@@ -50,7 +50,7 @@ if nat_instances.count > 2
   if node['nat']['yaml']['monitor_enabled']
     az = node['ec2']['placement_availability_zone']
 
-    %w(begin success fail).each do |status|
+    %w(run complete fail).each do |status|
       node.set['nat']['yaml']['monitor_urls'][status] =
         node['nat']['monitor']['api_urls'][az][status]
     end
