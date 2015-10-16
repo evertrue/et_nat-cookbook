@@ -11,7 +11,7 @@ if nat_instances.count > 2
 
   gem_package 'nat-monitor' do
     action :upgrade
-    version '4.0.0'
+    version '4.0.1'
   end
 
   log 'Other instances found.  Setting up the NAT Monitor.' do
