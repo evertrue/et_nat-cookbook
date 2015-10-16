@@ -10,7 +10,7 @@ addons:
 env:
   - CHEF_BIN=/opt/chefdk/embedded/bin
 before_script:
-  - eval "$(${CHEF_BIN}/chef shell-init bash)"
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
   # - ${CHEF_BIN}/chef gem install kitchen-ec2
   - ${CHEF_BIN}/berks
 script:
