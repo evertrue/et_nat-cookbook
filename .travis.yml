@@ -20,3 +20,6 @@ script:
   - "${CHEF_BIN}/foodcritic --version"
   - "${CHEF_BIN}/foodcritic ."
   # - KITCHEN_YAML=.kitchen.cloud.yml ${CHEF_BIN}/kitchen test
+notifications:
+  slack:
+    secure: hLFvL6U6ZCOVmufG33H7gUDC1Vp3YR83kDc8yDnzly5kwz+HJylWoLLVAS0xTEE6U066KjaP6Zjqcsz+jrF5HV5CcKskoL3iCmQ0wTB0MZw/CH92tuZe051MoLIdwFyqWYzQMbiSrAHls6ApiTQBFmkyRfhdFjAC4kwbIW7riac=
