@@ -33,6 +33,7 @@ The `--associate-public-ip` is especially crucial, as otherwise, the instance wi
 # Attributes
 
 * `['nat']['yaml']['mocking']`: Default value is `true`
+* `['nat']['yaml']['monitor_enabled']`: Default value is `false`
 
 # Recipes
 
