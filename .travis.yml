@@ -12,11 +12,11 @@ env:
 before_script:
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
   # - ${CHEF_BIN}/chef gem install kitchen-ec2
-  - ${CHEF_BIN}/berks
+  - "${CHEF_BIN}/berks"
 script:
-  - ${CHEF_BIN}/chef --version
-  - ${CHEF_BIN}/rubocop --version
-  - ${CHEF_BIN}/rubocop
-  - ${CHEF_BIN}/foodcritic --version
-  - ${CHEF_BIN}/foodcritic .
+  - "${CHEF_BIN}/chef --version"
+  - "${CHEF_BIN}/rubocop --version"
+  - "${CHEF_BIN}/rubocop"
+  - "${CHEF_BIN}/foodcritic --version"
+  - "${CHEF_BIN}/foodcritic ."
   # - KITCHEN_YAML=.kitchen.cloud.yml ${CHEF_BIN}/kitchen test
