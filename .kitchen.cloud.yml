@@ -1,18 +1,17 @@
 ---
 driver:
   name: ec2
-  aws_access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] %>
-  aws_secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] %>
   aws_ssh_key_id: <%= ENV['AWS_KEYPAIR_NAME'] %>
-  ssh_key: <%= ENV['EC2_SSH_KEY_PATH'] %>
   region: us-east-1
   availability_zone: us-east-1b
   security_group_ids: ['sg-c204d2a7']
   username: ubuntu
-  flavor_id: c3.large
+  instance_type: c3.large
   subnet_id: subnet-a792da8f
   iam_profile_name: test-nat-ha
   interface: private
+  transport:
+    ssh_key: <%= ENV['EC2_SSH_KEY_PATH'] %>
 
 provisioner:
   name: chef_zero
