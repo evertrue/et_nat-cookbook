@@ -44,6 +44,10 @@ The `--associate-public-ip` is especially crucial, as otherwise, the instance wi
 ## ha
 
 * Provides mechanisms for maintaining high availability of a cluster of NAT instances using Chef Search & a NAT monitor script
+* Can set up snitch-style monitoring using [Cronitor](https://cronitor.io)
+    - Specify `monitor_token` and `monitor_opts` in your YAML config to create a new Cronitor monitor
+    - Specify `monitor_code` to use an existing Cronitor monitor
+    - See the [`cronitor` gem](https://github.com/evertrue/cronitor) docs for details on what these fields expect
 
 ## iptables
 

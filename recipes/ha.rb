@@ -11,7 +11,7 @@ if nat_instances.count > 2
 
   gem_package 'nat-monitor' do
     action :upgrade
-    version '3.0.6'
+    version '4.0.0'
   end
 
   log 'Other instances found.  Setting up the NAT Monitor.' do
@@ -45,15 +45,6 @@ if nat_instances.count > 2
         node.chef_environment,
         conn_opts
       )
-  end
-
-  if node['nat']['yaml']['monitor_enabled']
-    az = node['ec2']['placement_availability_zone']
-
-    %w(run complete fail).each do |status|
-      node.set['nat']['yaml']['monitor_urls'][status] =
-        node['nat']['monitor']['api_urls'][az][status]
-    end
   end
 
   file '/etc/nat_monitor.yml' do
