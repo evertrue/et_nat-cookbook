@@ -56,4 +56,4 @@ The `--associate-public-ip` is especially crucial, as otherwise, the instance wi
 
 # Author
 
-Author:: Eric Herot (<eric.herot@evertrue.com>)
+Author:: EverTrue (<devops@evertrue.com>)
