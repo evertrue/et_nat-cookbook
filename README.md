@@ -1,5 +1,7 @@
 # et_nat cookbook
 
+[![Cookbook Version](https://img.shields.io/cookbook/v/et_nat.svg)](https://community.chef.io/cookbooks/apt)
+
 A cookbook to provide a NAT for an EC2 VPC (with HA if desired)
 
 # Requirements
