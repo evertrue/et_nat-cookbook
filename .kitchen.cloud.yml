@@ -25,7 +25,7 @@ platforms:
     driver_config:
       image_id: ami-44e9752c
       tags:
-        Name: travis-ci-default-ubuntu-1204
+        Name: travis-ci-default-ubuntu-1404
         Env: public
 
 suites:
