@@ -37,6 +37,7 @@ The `--associate-public-ip` is especially crucial, as otherwise, the instance wi
 
 * `['nat']['yaml']['mocking']`: Default value is `true`
 * `['nat']['yaml']['monitor_enabled']`: Default value is `false`
+* `['nat']['search_string']` = Default value is `'run_list:recipe\[et_nat\]'`
 
 # Recipes
 
