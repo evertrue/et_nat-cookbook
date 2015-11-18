@@ -11,8 +11,9 @@ driver:
   subnet_id: subnet-a792da8f
   iam_profile_name: test-nat-ha
   interface: private
-  transport:
-    ssh_key: <%= ENV['EC2_SSH_KEY_PATH'] %>
+
+transport:
+  ssh_key: <%= ENV['EC2_SSH_KEY_PATH'] %>
 
 provisioner:
   name: chef_zero
